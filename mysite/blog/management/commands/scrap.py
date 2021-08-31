@@ -32,16 +32,21 @@ class Command(BaseCommand):
                 each_html=PyQuery(each_page.text)
                 title_html=each_html(".tutorial-content h1").text()
                 text_each=each_html(".tutorial-content p").text() 
+                
                 text_img=each_html(".cover img").attr("src")
-                # File_image=glob(text_img+"*.jpg")
 
                 if(text_img):
-                    img_name=each_html(".cover img").attr("src")
+                    img_name=each_html(".cover img").attr("src").split("/")[-1]
                     img_url="https://www.tutorialspoint.com"+text_img
-                    image_filename = wget.download(img_url,"media/documents")
 
-                    with open('media/documents'+img_name,'wb') as img_file:
-                        image=requests.get(image_filename)
+                    # one way by downloading image
+                    # image_filename = wget.download(img_url,"media/documents")
+                    # print(image_filename)
+
+                    # 2nd way by creating new directory and displaying the image 
+
+                    with open('media/documents/'+img_name,'wb') as img_file:
+                        image=requests.get(img_url)
                         img_file.write(image.content)
                 if(Post.objects.filter(title=title_html)):
                     print("Already in database")
@@ -51,7 +56,7 @@ class Command(BaseCommand):
                     title=each_html(".tutorial-content h1").text(),
                     text=each_html(".tutorial-content p").text(),
                     published_date=timezone.now(),
-                    image_file=img_name if text_img else None)
+                    image_file="/documents/"+img_name)
                     all_data.append(scraped_data)
                     count+=1
         Post.objects.bulk_create(all_data)

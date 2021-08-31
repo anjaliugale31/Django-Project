@@ -14,8 +14,8 @@
         {% endif %}
         <h2>{{ post.title }}</h2>
         {%if post.image_file %}
-        <div class="container p-10 my-30">
-            <img src="{{post.image_file.url}}" height="50%" width="50%">
+        <div class="container p-15 my-40">
+            <img src="{{post.image_file.url}}" height="70%" width="50%">
         </div>
         {% endif%}
         <p>{{ post.text|linebreaksbr }}</p>

@@ -12,12 +12,16 @@
                 {{ post.published_date }}
             </time>
         {% endif %}
+        <div class="container p-10 my-3">
         <h2>{{ post.title }}</h2>
         {%if post.image_file %}
         <div class="container p-15 my-40">
-            <img src="{{post.image_file.url}}" height="70%" width="50%">
+            <img src="{{post.image_file.url}}" height="70%" width="100%">
         </div>
         {% endif%}
+        <div class="container p-10 my-3">
         <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+        </div>
     </article>
 {% endblock %}

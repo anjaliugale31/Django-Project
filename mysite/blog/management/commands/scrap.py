@@ -62,10 +62,11 @@ class Command(BaseCommand):
                     all_data.append(scraped_data)
                     count+=1
         Post.objects.bulk_create(all_data)
+        #condition for 
         if(count>0):
-            print("pages scrap",count)
+            print("Number of pages scrap :",count)
         else:
-            print("ALl pages scrap")
+            print("All pages scrap")
 
 
 
